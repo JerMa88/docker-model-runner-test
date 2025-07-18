@@ -1,4 +1,6 @@
-# no 'version:' header—must be Compose v2.38+
+# docker-compose.yml
+# (no `version:` header—Compose v2 infers spec automatically)
+
 services:
   bench:
     build:
@@ -9,18 +11,19 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     restart: "no"
-    # ─── bind the 'my_model' model but override the injected var names ───
+    # ─── bind your model via Compose Models ───
     models:
       my_model:
-        endpoint_var: LLM_URL       # injected into bench
-        model_var:    LLM_MODEL     # injected into bench
-    command: ["python", "bench_docker.py"]
+        endpoint_var: LLM_URL    # Injects the model endpoint URL here
+        model_var:    LLM_MODEL  # Injects the model identifier here
+    command: ["python", "load_test.py"]
 
 models:
   my_model:
-    model: ${LLM_MODEL_NAME}       # from your .env
+    model: ${LLM_MODEL_NAME}    # Pulled from .env
     context_size: 4096
     runtime_flags:
+      - "--parallel 2"
       - "--no-prefill-assistant"
 
 networks:

@@ -3,12 +3,12 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# copy pip requirements & install
+# Install dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# copy your bench script
-COPY bench_docker.py .
+# Copy load‑test script
+COPY load_test.py .
 
-# default command is overridden by compose
-CMD ["python", "bench_docker.py"]
+# Default command overridden by docker-compose.yml
+CMD ["python", "load_test.py"]

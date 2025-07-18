@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-# bring down any leftovers
+# Tear down any previous run
 docker compose down --remove-orphans
 
-# build & run bench
+# Build and start bench (Compose will handle the model for you)
 docker compose up --build
