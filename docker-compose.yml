@@ -1,0 +1,29 @@
+# no 'version:' header—must be Compose v2.38+
+services:
+  bench:
+    build:
+      context: ./bench-app
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: "no"
+    # ─── bind the 'my_model' model but override the injected var names ───
+    models:
+      my_model:
+        endpoint_var: LLM_URL       # injected into bench
+        model_var:    LLM_MODEL     # injected into bench
+    command: ["python", "bench_docker.py"]
+
+models:
+  my_model:
+    model: ${LLM_MODEL_NAME}       # from your .env
+    context_size: 4096
+    runtime_flags:
+      - "--no-prefill-assistant"
+
+networks:
+  default:
+    name: dmr-compose-bench-net
+    driver: bridge
