@@ -23,7 +23,7 @@ models:
     model: ${LLM_MODEL_NAME}    # Pulled from .env
     context_size: 4096
     runtime_flags:
-      - "--parallel 2"
+      # - "--parallel 2"
       - "--no-prefill-assistant"
 
 networks:

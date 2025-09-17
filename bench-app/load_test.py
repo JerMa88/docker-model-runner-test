@@ -34,8 +34,12 @@ async def send_request(session, user_id):
         timeout = aiohttp.ClientTimeout(total=600)
         async with session.post(API_URL, json=PAYLOAD, headers=HEADERS, timeout=timeout) as resp:
             data = await resp.json()
+            # print(f'Type of resp: {type(resp)} \n Status: {resp.status} \n Resp: {resp}')
             duration = time.time() - start
             if resp.status == 200:
+                print(f"User {user_id}: success in {duration:.1f}s")
+                # print(f'Type of data: {type(data)}')
+                # if type(data) == 'bytes': print(data.decode())  # print first 200 chars of response
                 tokens = data.get("usage", {}).get("completion_tokens", 0)
                 if tokens:
                     total_tokens += tokens
