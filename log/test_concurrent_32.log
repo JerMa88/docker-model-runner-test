@@ -1,0 +1,86 @@
+#1 [internal] load local bake definitions
+#1 reading from stdin 607B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 327B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/python:3.10-slim
+#3 DONE 0.7s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/5] FROM docker.io/library/python:3.10-slim@sha256:8769cc10045c67eac267537ff0950ce644eeebd9f0e88bec0604548a88f1f33d
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 69B done
+#6 DONE 0.0s
+
+#7 [4/5] RUN pip install --no-cache-dir -r requirements.txt
+#7 CACHED
+
+#8 [3/5] COPY requirements.txt .
+#8 CACHED
+
+#9 [2/5] WORKDIR /app
+#9 CACHED
+
+#10 [5/5] COPY load_test.py .
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:d3c73bdc1a30157331f0db3c35186b9870df6235dea8c1a122875fa5042a6499 done
+#11 naming to docker.io/library/docker-model-runner-test-bench done
+#11 DONE 0.0s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
+Attaching to bench-1
+bench-1  | Running 32 concurrent users against http://model-runner.docker.internal/engines/v1/chat/completions
+bench-1  | User 30: success in 56.7s
+bench-1  | User 20: success in 57.8s
+bench-1  | User 16: success in 61.4s
+bench-1  | User 19: success in 61.5s
+bench-1  | User 15: success in 86.7s
+bench-1  | User 28: success in 87.4s
+bench-1  | User 3: success in 89.6s
+bench-1  | User 22: success in 89.9s
+bench-1  | User 25: success in 114.4s
+bench-1  | User 24: success in 116.9s
+bench-1  | User 29: success in 117.7s
+bench-1  | User 18: success in 118.1s
+bench-1  | User 14: success in 144.6s
+bench-1  | User 13: success in 144.9s
+bench-1  | User 5: success in 145.4s
+bench-1  | User 17: success in 146.1s
+bench-1  | User 32: success in 168.9s
+bench-1  | User 7: success in 169.7s
+bench-1  | User 2: success in 169.9s
+bench-1  | User 21: success in 173.7s
+bench-1  | User 1: success in 197.5s
+bench-1  | User 23: success in 199.0s
+bench-1  | User 31: success in 202.6s
+bench-1  | User 8: success in 205.7s
+bench-1  | User 11: success in 227.8s
+bench-1  | User 12: success in 228.5s
+bench-1  | User 6: success in 235.9s
+bench-1  | User 26: success in 244.1s
+bench-1  | User 27: success in 256.6s
+bench-1  | User 9: success in 260.0s
+bench-1  | User 10: success in 261.6s
+bench-1  | User 4: success in 266.1s
+bench-1  | 
+bench-1  | === Load Test Results ===
+bench-1  | Time taken: 266.1s
+bench-1  | Requests:  32
+bench-1  |  Success:  32
+bench-1  |  Failures: 0
+bench-1  |  Tokens:   21533
+bench-1  | TPS:      80.92
+bench-1  | RPS:      0.12
+[Kbench-1 exited with code 0
